@@ -1,6 +1,10 @@
 import React from "react";
-
+import { useLoaderData } from "react-router-dom";
 const PropertyAddress = () => {
+  const propertyData = useLoaderData();
+  console.log(propertyData);
+  const { address, area, city } = propertyData;
+
   return (
     <div>
       <p className="fs-4 border-bottom">Address</p>
@@ -10,7 +14,7 @@ const PropertyAddress = () => {
             <h6 className="fw-bold">Address</h6>
           </div>
           <div className="col-6">
-            <span>Dhanmondi 32, Dhaka</span>
+            <span>{address}</span>
           </div>
         </div>
         <div className="row">
@@ -18,7 +22,7 @@ const PropertyAddress = () => {
             <h6 className="fw-bold">Area</h6>
           </div>
           <div className="col-6">
-            <span>Dhanmondi</span>
+            <span>{area}</span>
           </div>
         </div>
         <div className="row">
@@ -26,7 +30,7 @@ const PropertyAddress = () => {
             <h6 className="fw-bold">City</h6>
           </div>
           <div className="col-6">
-            <span>Dhaka</span>
+            <span>{city}</span>
           </div>
         </div>
         <div className="row">

@@ -9,10 +9,10 @@ import useTitle from "../../hooks/useTitle";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
-  const [isAdmin] = useAdmin(user?.email)
-  const [isSeller] = useSeller(user?.email)
+  const [isAdmin] = useAdmin(user?.email);
+  const [isSeller] = useSeller(user?.email);
   const [myProperty, setMyProperty] = useState([]);
-  useTitle('Dashboard');
+  useTitle("Dashboard");
   useEffect(() => {
     fetch("dashboard-data.json")
       .then((res) => res.json())
@@ -23,22 +23,35 @@ const Dashboard = () => {
       <NavSection></NavSection>
       <h3 className="text-center mb-5 mt-5">Welcome to Dashboard</h3>
       <div className="row">
-        <div className="col-md-3 col-lg-3 col-sm-12">
-
-          {
-            isAdmin &&
+        <div className="col-md-3 col-lg-3 col-sm-12 mb-4">
+          {isAdmin && (
             <>
-              <li><Link to="/dashboard/allRenters">All Renters</Link></li>
-              <li><Link to="/dashboard/allOwners">All Owners</Link></li>
+              <div className="">
+                <Link className="dashboard-btn " to="/dashboard/allRenters">
+                  All Renters
+                </Link>
+              </div>
+              <div className="mt-3">
+                <Link className="dashboard-btn " to="/dashboard/allOwners">
+                  All Owners
+                </Link>
+              </div>
             </>
-          }
-          {
-            isSeller &&
+          )}
+          {isSeller && (
             <>
-              <li><Link to="/dashboard/myProperty">My Property</Link></li>
-              <li><Link to="/addProperty">My Property</Link></li>
+              <div className="">
+                <Link className="dashboard-btn " to="/dashboard/myProperty">
+                  My Property
+                </Link>
+              </div>
+              <div className="mt-3">
+                <Link className="dashboard-btn " to="/addProperty">
+                  Add Property
+                </Link>
+              </div>
             </>
-          }
+          )}
         </div>
         <div className="col-md-9 col-lg-9  col-sm-12">
           <Outlet></Outlet>

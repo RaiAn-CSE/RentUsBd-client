@@ -8,19 +8,41 @@ import PropertyFeatures from "../../component/PropertyFeatures/PropertyFeatures"
 import { useLoaderData } from "react-router-dom";
 
 const PropertyDetails = () => {
-
   const propertyData = useLoaderData();
   console.log(propertyData);
-  const { address, area, bath, category, city, details, elevator, email, garage, gas, image, image1, image2, kitchen, month, name, phone, propertySize, rent, room, title, _id } = propertyData;
+  const {
+    address,
+    area,
+    bath,
+    category,
+    city,
+    details,
+    elevator,
+    email,
+    garage,
+    gas,
+    image,
+    image1,
+    image2,
+    kitchen,
+    month,
+    name,
+    phone,
+    propertySize,
+    rent,
+    room,
+    title,
+    _id,
+  } = propertyData;
 
   console.log(image, image1, image2);
 
   return (
     <div>
       <section className="banner-section container my-5">
-        <h3>Property Name</h3>
+        <h3>{title}</h3>
         <p>
-          <MdLocationOn className="font-awesome-icon me-2" /> Location
+          <MdLocationOn className="font-awesome-icon me-2" /> {area}, {city}
         </p>
         <div className="row gx-5">
           <div className="col-lg-8 col-md-8 col-12">
@@ -114,41 +136,11 @@ const PropertyDetails = () => {
           </div>
           <div className="col-lg-4 col-md-4 col-12 m-3 m-lg-0 m-md-0  contact-section ">
             <h4>Manage By:- </h4>
+            <h5>RentUs</h5>
             <img src="./assets/img/logo.svg" alt="" />
-            <p className="mt-3">Contact Us For More Information</p>
-            <form action="">
-              <div className="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                />
-                <small id="emailHelp" className="form-text text-muted">
-                  We'll never share your email with anyone else.
-                </small>
-              </div>
-              <div className="form-group mt-2">
-                <label for="exampleInputPassword1">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"
-                />
-              </div>
-              <div className="form-group mt-2">
-                <label for="phoneNumber">Phone No</label>
-                <input
-                  type="tel"
-                  className="form-control"
-                  id="phoneNumber"
-                  placeholder="Phone Number"
-                />
-              </div>
-            </form>
+            <p className="mt-3">
+              Contact With property owner for more information
+            </p>
             <div className="mt-2 fs-5">
               Chat <i className="fa-solid fa-message font-awesome-icon"></i>
             </div>
@@ -157,13 +149,13 @@ const PropertyDetails = () => {
               <div className="col-6">
                 {" "}
                 <button className="contact-btn">
-                  <a href="tel:01882345960">Call</a>
+                  <a href={"tel:" + phone}>Call</a>
                 </button>
               </div>
               <div className="col-6">
                 {" "}
                 <button className="contact-btn">
-                  <a href="mailto:robiul15-2516@diu.edu.bd">Email</a>
+                  <a href={"mailto:" + email}>Email</a>
                 </button>
               </div>
             </div>

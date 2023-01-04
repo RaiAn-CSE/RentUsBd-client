@@ -7,50 +7,54 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import useTitle from "../../hooks/useTitle";
 
 const Signup = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [signUpError, setSignUPError] = useState('');
-  const { createUser, updateUser } = useContext(AuthContext)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [signUpError, setSignUPError] = useState("");
+  const { createUser, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  useTitle('SignUp');
+  useTitle("SignUp");
 
   const handleSignUp = (data) => {
     // setSignUPError('');
     console.log(data);
     createUser(data.email, data.password, data.userType)
-      .then(result => {
+      .then((result) => {
         const user = result.user;
         console.log(user);
         const userInfo = {
-          displayName: data.name
-        }
+          displayName: data.name,
+        };
         updateUser(userInfo)
           .then(() => {
-            navigate('/');
+            navigate("/");
             saveUser(data.name, data.email, data.userType);
           })
-          .catch(err => console.log(err));
+          .catch((err) => console.log(err));
       })
 
-      .catch(error => {
-        console.log(error)
-        setSignUPError(error.message)
+      .catch((error) => {
+        console.log(error);
+        setSignUPError(error.message);
       });
-  }
+  };
 
   const saveUser = (name, email, userType) => {
     const user = { name, email, role: userType };
-    fetch('http://localhost:5000/users', {
-      method: 'POST',
+    fetch("http://localhost:5000/users", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data);
-      })
-  }
+      });
+  };
 
   return (
     <div>
@@ -72,15 +76,6 @@ const Signup = () => {
               </div>
               <form onSubmit={handleSubmit(handleSignUp)}>
                 <div className="m-3">
-                  {/* User :  */}
-                  <div className="form-control w-full max-w-xs">
-                    <label className="label"> <span className="label-text">User Type</span></label>
-                    <select {...register("userType")}>
-                      <option value="buyer">buyer</option>
-                      <option value="seller">seller</option>
-                    </select>
-                    {errors.userType && <p className='text-red-500'>{errors.userType.message}</p>}
-                  </div>
                   <label
                     for="exampleFormControlInput1"
                     className="form-label float-start"
@@ -101,13 +96,17 @@ const Signup = () => {
                     Email address
                   </label>
                   <input
-                    {...register("email", { required: "Email Address is required" })}
+                    {...register("email", {
+                      required: "Email Address is required",
+                    })}
                     type="email"
                     className="form-control"
                     id="exampleFormControlInput2"
                     placeholder="name@example.com"
                   />
-                  {errors.email && <p className='text-danger'>{errors.email?.message}</p>}
+                  {errors.email && (
+                    <p className="text-danger">{errors.email?.message}</p>
+                  )}
                   <label
                     for="exampleFormControlInput3"
                     className="form-label float-start"
@@ -130,29 +129,37 @@ const Signup = () => {
                   <input
                     {...register("password", {
                       required: "Password is required",
-                      minLength: { value: 6, message: 'Password must be 6 characters or longer' }
+                      minLength: {
+                        value: 6,
+                        message: "Password must be 6 characters or longer",
+                      },
                     })}
                     type="password"
                     className="form-control"
                     placeholder="Password"
                     id="password"
                   />
-                  {errors.password && <p className='text-danger'>{errors.password?.message}</p>}
-                  <input
-                    type="password"
-                    className="form-control mt-3"
-                    placeholder="Confirm password"
-                    id="confirmPassword"
-                  />
-                  <input
-                    type="checkbox"
-                    className=" m-3"
-                    onclick="myFunction()"
-                  />
-                  Show Password
+                  {errors.password && (
+                    <p className="text-danger">{errors.password?.message}</p>
+                  )}
+                  {/* User :  */}
+
+                  <label className="float-start"> User Type</label>
+                  <select className="form-select" {...register("userType")}>
+                    <option value="">Choose</option>
+                    <option value="buyer">Renter</option>
+                    <option value="seller">Property Owner</option>
+                  </select>
+                  {errors.userType && (
+                    <p className="text-red-500">{errors.userType.message}</p>
+                  )}
                 </div>
-                {signUpError && <p className='text-danger'>{signUpError}</p>}
-                <input className="signIn-btn mb-5 login-btn" value='Sign Up' type="submit" />
+                {signUpError && <p className="text-danger">{signUpError}</p>}
+                <input
+                  className="signIn-btn mb-5 login-btn"
+                  value="Sign Up"
+                  type="submit"
+                />
               </form>
             </div>
           </div>

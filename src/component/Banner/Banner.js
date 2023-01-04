@@ -36,7 +36,7 @@ const Banner = () => {
             ></button>
           </div>
           <div className="carousel-inner">
-            <div className="carousel-item active">
+            <div className="carousel-item active carousel-Item">
               <img
                 src={banner1}
                 className="d-block w-100 banner-image-resize"
@@ -44,14 +44,14 @@ const Banner = () => {
               />
             </div>
 
-            <div className="carousel-item">
+            <div className="carousel-item carousel-Item">
               <img
                 src={banner2}
                 className="d-block w-100 banner-image-resize"
                 alt="..."
               />
             </div>
-            <div className="carousel-item">
+            <div className="carousel-item carousel-Item">
               <img
                 src={banner4}
                 className="d-block w-100 banner-image-resize"

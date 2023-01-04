@@ -7,6 +7,7 @@ import AllOwners from "../Pages/AllOwners/AllOwners";
 // import AllOwners from "../Pages/AllOwners/AllOwners";
 import AllProperty from "../Pages/AllProperty/AllProperty";
 import AllRenters from "../Pages/AllRenters/AllRenters";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 // import AllRenters from "../Pages/AllRenters/AllRenters";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Home from "../Pages/Home/Home";
@@ -33,11 +34,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/addProperty",
-        element: <PrivateRoute><AddProperty></AddProperty></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <AddProperty></AddProperty>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/aboutUs",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/contactUs",
+        element: (
+          <PrivateRoute>
+            <ContactUs />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/logIn",
@@ -53,29 +66,33 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <PrivateRoute><PropertyDetails /></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/details/${params.id}`)
-      }
+        element: (
+          <PrivateRoute>
+            <PropertyDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/details/${params.id}`),
+      },
     ],
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <Dashboard />,
     children: [
       {
-        path: '/dashboard/allRenters',
-        element: <AllRenters></AllRenters>
+        path: "/dashboard/allRenters",
+        element: <AllRenters></AllRenters>,
       },
       {
-        path: '/dashboard/allOwners',
-        element: <AllOwners></AllOwners>
+        path: "/dashboard/allOwners",
+        element: <AllOwners></AllOwners>,
       },
       {
-        path: '/dashboard/myProperty',
-        element: <MyProperty></MyProperty>
+        path: "/dashboard/myProperty",
+        element: <MyProperty></MyProperty>,
       },
-
-    ]
-  }
+    ],
+  },
 ]);
 export default router;

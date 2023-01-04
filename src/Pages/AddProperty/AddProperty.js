@@ -8,7 +8,7 @@ import useTitle from "../../hooks/useTitle";
 
 const AddProperty = () => {
   const { user } = useContext(AuthContext);
-  useTitle('Add Property')
+  useTitle("Add Property");
   const {
     register,
     handleSubmit,
@@ -24,13 +24,11 @@ const AddProperty = () => {
     console.log(data);
 
     const image = data.image[0];
-    const image1 = data.image1[0];
-    const image2 = data.image2[0];
+
     // console.log(image, image1, image2);
     const formData = new FormData();
     formData.append("image", image);
-    formData.append("image1", image1);
-    formData.append("image2", image2);
+
     console.log(formData);
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
     // console.log(url);
@@ -63,8 +61,6 @@ const AddProperty = () => {
             room: parseInt(data.room),
             title: data.title,
             image: imgData.data.url,
-            image1: imgData.data.url,
-            image2: imgData.data.url,
           };
 
           // Save Products information to the database
@@ -100,11 +96,13 @@ const AddProperty = () => {
                     <Form.Label>Name*</Form.Label>
                     <Form.Control
                       {...register("name", {
-                        required: "Name is Required"
+                        required: "Name is Required",
                       })}
                       type="text"
                     />
-                    {errors.name && <p className='text-danger'>{errors.name.message}</p>}
+                    {errors.name && (
+                      <p className="text-danger">{errors.name.message}</p>
+                    )}
                   </Form.Group>
                 </Form>
               </div>
@@ -118,6 +116,9 @@ const AddProperty = () => {
                       })}
                       type="number"
                     />
+                    {errors.name && (
+                      <p className="text-danger">{errors.phone.message}</p>
+                    )}
                   </Form.Group>
                 </Form>
               </div>
@@ -126,7 +127,8 @@ const AddProperty = () => {
                   <Form.Label>Email*</Form.Label>
                   <Form.Control
                     type="email"
-                    defaultValue={user?.email} disabled
+                    defaultValue={user?.email}
+                    disabled
                   />
                 </Form>
               </div>
@@ -137,35 +139,44 @@ const AddProperty = () => {
                 <Form.Label>Property Title*</Form.Label>
                 <Form.Control
                   {...register("title", {
-                    required: "Email is Required",
+                    required: "Property title is Required",
                   })}
                   type="text"
-                  placeholder="enter property title"
+                  placeholder="Enter property title"
                 />
+                {errors.name && (
+                  <p className="text-danger">{errors.title.message}</p>
+                )}
               </Form.Group>
               <Form.Group className="mb-2" controlId="">
-                <Form.Label>Property Details</Form.Label>
+                <Form.Label>Property Details*</Form.Label>
                 <Form.Control
                   {...register("details", {
-                    required: "Email is Required",
+                    required: "Property Details is Required",
                   })}
                   type="text"
                   as="textarea"
                   rows={3}
                   placeholder="write details of a property"
                 />
+                {errors.name && (
+                  <p className="text-danger">{errors.details.message}</p>
+                )}
               </Form.Group>
               <Form.Group className="mb-2">
                 <div className="row">
                   <div className="col-6">
-                    <Form.Label>Rent</Form.Label>
+                    <Form.Label>Rent*</Form.Label>
                     <Form.Control
                       {...register("rent", {
-                        required: "Email is Required",
+                        required: "Rent amount is Required",
                       })}
                       type="number"
                       placeholder="rent amount"
                     />
+                    {errors.name && (
+                      <p className="text-danger">{errors.rent.message}</p>
+                    )}
                   </div>
                   <div className="col-6">
                     <Form>
@@ -173,7 +184,7 @@ const AddProperty = () => {
                         <Form.Label>Available From*</Form.Label>
                         <Form.Select
                           {...register("month", {
-                            required: "Email is Required",
+                            required: "Available month is Required",
                           })}
                           aria-label="Default select example"
                         >
@@ -191,13 +202,13 @@ const AddProperty = () => {
                           <option value="November">November</option>
                           <option value="December">December</option>
                         </Form.Select>
+                        {errors.name && (
+                          <p className="text-danger">{errors.month.message}</p>
+                        )}
                       </Form.Group>
                     </Form>
                   </div>
                 </div>
-              </Form.Group>
-              <Form.Group className="mb-2" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Negotiable" />
               </Form.Group>
             </Form>
 
@@ -208,11 +219,16 @@ const AddProperty = () => {
                     <Form.Label>Property Size*</Form.Label>
                     <Form.Control
                       {...register("propertySize", {
-                        required: "Email is Required",
+                        required: "Property size is Required",
                       })}
                       type="number"
                       placeholder="size of a property in sqft."
                     />
+                    {errors.name && (
+                      <p className="text-danger">
+                        {errors.propertySize.message}
+                      </p>
+                    )}
                   </Form.Group>
                 </Form>
               </div>
@@ -222,7 +238,7 @@ const AddProperty = () => {
                     <Form.Label>City*</Form.Label>
                     <Form.Select
                       {...register("city", {
-                        required: "Email is Required",
+                        required: "city is Required",
                       })}
                       aria-label="Default select example"
                     >
@@ -236,6 +252,9 @@ const AddProperty = () => {
                       <option value="Sylhet">Sylhet</option>
                       <option value="Mymensingh">Mymensingh</option>
                     </Form.Select>
+                    {errors.name && (
+                      <p className="text-danger">{errors.city.message}</p>
+                    )}
                   </Form.Group>
                 </Form>
               </div>
@@ -245,7 +264,7 @@ const AddProperty = () => {
                     <Form.Label>Area*</Form.Label>
                     <Form.Select
                       {...register("area", {
-                        required: "Email is Required",
+                        required: "Area is Required",
                       })}
                       aria-label="Default select example"
                     >
@@ -259,6 +278,9 @@ const AddProperty = () => {
                       <option value="Khilkhet">Khilkhet</option>
                       <option value="Farmgate">Farmgate</option>
                     </Form.Select>
+                    {errors.name && (
+                      <p className="text-danger">{errors.area.message}</p>
+                    )}
                   </Form.Group>
                 </Form>
               </div>
@@ -270,7 +292,7 @@ const AddProperty = () => {
                     <Form.Label>Rent Category*</Form.Label>
                     <Form.Select
                       {...register("category", {
-                        required: "Email is Required",
+                        required: "Category is Required",
                       })}
                       aria-label="Default select example"
                     >
@@ -290,6 +312,9 @@ const AddProperty = () => {
                         Shop & Restaurant Space
                       </option>
                     </Form.Select>
+                    {errors.name && (
+                      <p className="text-danger">{errors.category.message}</p>
+                    )}
                   </Form.Group>
                 </Form>
               </div>
@@ -299,13 +324,16 @@ const AddProperty = () => {
                     <Form.Label>Address*</Form.Label>
                     <Form.Control
                       {...register("address", {
-                        required: "Email is Required",
+                        required: "Address is Required",
                       })}
                       type="text"
                       as="textarea"
                       rows={3}
-                      placeholder="write details of your property"
+                      placeholder="Location / address of your property"
                     />
+                    {errors.name && (
+                      <p className="text-danger">{errors.address.message}</p>
+                    )}
                   </Form.Group>
                 </Form>
               </div>
@@ -314,38 +342,23 @@ const AddProperty = () => {
               <div className="col-md-4 col-lg-4 col-sm-12">
                 <Form>
                   <Form.Group>
-                    <Form.Label>Room*</Form.Label>
-                    <Form.Control
-                      {...register("room", {
-                        required: "Email is Required",
-                      })}
-                      type="number"
-                    />
+                    <Form.Label>Room</Form.Label>
+                    <Form.Control {...register("room", {})} type="number" />
                   </Form.Group>
                 </Form>
               </div>
               <div className="col-md-4 col-lg-4 col-sm-12">
                 <Form>
                   <Form.Group>
-                    <Form.Label>Bath*</Form.Label>
-                    <Form.Control
-                      {...register("bath", {
-                        required: "Email is Required",
-                      })}
-                      type="number"
-                    />
+                    <Form.Label>Bath</Form.Label>
+                    <Form.Control {...register("bath", {})} type="number" />
                   </Form.Group>
                 </Form>
               </div>
               <div className="col-md-4 col-lg-4 col-sm-12">
                 <Form>
-                  <Form.Label>Kitchen*</Form.Label>
-                  <Form.Control
-                    {...register("kitchen", {
-                      required: "Email is Required",
-                    })}
-                    type="number"
-                  />
+                  <Form.Label>Kitchen</Form.Label>
+                  <Form.Control {...register("kitchen", {})} type="number" />
                 </Form>
               </div>
             </div>
@@ -353,24 +366,17 @@ const AddProperty = () => {
               <div className="col-md-4 col-lg-4 col-sm-12">
                 <Form>
                   <Form.Group>
-                    <Form.Label>Garage*</Form.Label>
-                    <Form.Control
-                      {...register("garage", {
-                        required: "Email is Required",
-                      })}
-                      type="number"
-                    />
+                    <Form.Label>Garage</Form.Label>
+                    <Form.Control {...register("garage", {})} type="number" />
                   </Form.Group>
                 </Form>
               </div>
               <div className="col-md-4 col-lg-4 col-sm-12">
                 <Form>
                   <Form.Group>
-                    <Form.Label>Gas*</Form.Label>
+                    <Form.Label>Gas</Form.Label>
                     <Form.Select
-                      {...register("gas", {
-                        required: "Email is Required",
-                      })}
+                      {...register("gas", {})}
                       aria-label="Default select example"
                     >
                       <option></option>
@@ -382,11 +388,9 @@ const AddProperty = () => {
               </div>
               <div className="col-md-4 col-lg-4 col-sm-12">
                 <Form>
-                  <Form.Label>Elevator*</Form.Label>
+                  <Form.Label>Elevator</Form.Label>
                   <Form.Select
-                    {...register("elevator", {
-                      required: "Email is Required",
-                    })}
+                    {...register("elevator", {})}
                     aria-label="Default select example"
                   >
                     <option></option>
@@ -400,35 +404,21 @@ const AddProperty = () => {
               <Form.Label>Upload Property Image 1</Form.Label>
               <Form.Control
                 {...register("image", {
-                  // required: "Email is Required",
+                  required: "Image is Required",
                 })}
                 type="file"
                 size="lg"
               />
+              {/* {errors.name && (
+                <p className="text-danger">{errors.image.message}</p>
+              )} */}
             </Form.Group>
-            <Form.Group controlId="formFileLg" className="mb-2">
-              <Form.Label>Upload Property Image 2</Form.Label>
-              <Form.Control
-                {...register("image1", {
-                  // required: "Email is Required",
-                })}
-                type="file"
-                size="lg"
-              />
-            </Form.Group>
-            <Form.Group controlId="formFileLg" className="mb-2">
-              <Form.Label>Upload Property Image 3</Form.Label>
-              <Form.Control
-                {...register("image2", {
-                  // required: "Email is Required",
-                })}
-                type="file"
-                size="lg"
-              />
-            </Form.Group>
+
+            <div className="text-center">
+              <input className="login-btn mt-4" value="Submit" type="submit" />
+            </div>
           </div>
         </div>
-        <input className="login-btn mb-5" value="Submit" type="submit" />
       </form>
     </div>
   );

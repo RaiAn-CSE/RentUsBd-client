@@ -5,14 +5,13 @@ import logo from "../../images/logo.svg";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const NavSection = () => {
-
   const { user, logOut } = useContext(AuthContext);
 
   const handleLogOut = () => {
     logOut()
-      .then(() => { })
-      .catch(err => console.log(err));
-  }
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -52,42 +51,52 @@ const NavSection = () => {
                   Add Property
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/aboutUs" className="nav-link nav-style">
+                  About Us
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/contactUs" className="nav-link nav-style">
+                  Contact Us
+                </Link>
+              </li>
             </ul>
 
-            {
-              user?.uid ?
-                <>
-                  <span className="navbar-text">
-                    <Link to="/dashboard" className="nav-link nav-style">
-                      Dashboard
-                    </Link>
-                  </span>
-                  <span className="navbar-text">
-                    <Link>
-                      <button onClick={handleLogOut} className="nav-button">Logout</button>
-                    </Link>
-                  </span>
-                </>
-                :
-                <>
-                  <span className="navbar-text">
-                    <Link to="/logIn">
-                      <button className="nav-button">Login</button>
-                    </Link>
-                  </span>
-                  <span className="navbar-text ms-lg-3 ms-md-3 ms-sm-0">
-                    <Link to="/signUp">
-                      <button
-                        className="nav-button"
-                        style={{ backgroundColor: "#7065f0", color: "White" }}
-                      >
-                        SignUp
-                      </button>
-                    </Link>
-                  </span>
-                </>
-            }
-
+            {user?.uid ? (
+              <>
+                <span className="navbar-text">
+                  <Link to="/dashboard" className="nav-link nav-style">
+                    Dashboard
+                  </Link>
+                </span>
+                <span className="navbar-text">
+                  <Link>
+                    <button onClick={handleLogOut} className="nav-button">
+                      Logout
+                    </button>
+                  </Link>
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="navbar-text">
+                  <Link to="/logIn">
+                    <button className="nav-button">Login</button>
+                  </Link>
+                </span>
+                <span className="navbar-text ms-lg-3 ms-md-3 ms-sm-0">
+                  <Link to="/signUp">
+                    <button
+                      className="nav-button"
+                      style={{ backgroundColor: "#7065f0", color: "White" }}
+                    >
+                      SignUp
+                    </button>
+                  </Link>
+                </span>
+              </>
+            )}
           </div>
         </div>
       </nav>

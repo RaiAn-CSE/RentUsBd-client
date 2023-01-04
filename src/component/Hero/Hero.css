@@ -51,11 +51,17 @@
   .search-category {
     border-right: 1px solid #e0def7;
   }
+
 }
 
 @media screen and (max-width: 800px) {
   .search-category {
     border-right: 0;
+
+  }
+
+  .search-property {
+    margin-top: -150px;
   }
 }
 

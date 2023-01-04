@@ -109,6 +109,11 @@ const TopListingProperty = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className="text-center mt-2 mb-4">
+        <Link to="/allProperty" className="details">
+          View All Property
+        </Link>
+      </div>
     </div>
   );
 };

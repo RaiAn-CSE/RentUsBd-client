@@ -7,8 +7,8 @@ import TopListingProperty from "../../component/TopListingProperty/TopListingPro
 
 const Home = () => {
   const [category, setCategory] = useState([]);
-  const [add, setAdd] = useState([])
-  const [totalAdd, setTotalAdd] = useState(0)
+  const [add, setAdd] = useState([]);
+  const [totalAdd, setTotalAdd] = useState(0);
   useEffect(() => {
     fetch("category.json")
       .then((res) => res.json())
@@ -17,19 +17,21 @@ const Home = () => {
 
   useEffect(() => {
     fetch(`http://localhost:5000/allProducts`)
-      .then(res => res.json())
-      .then(data => setAdd(data))
-  }, [])
+      .then((res) => res.json())
+      .then((data) => setAdd(data));
+  }, []);
 
   return (
     <div>
       <Banner></Banner>
       <Hero></Hero>
       <section className="category-section h-auto w-auto py-5">
-        <div className="container">
-          <div className="category-title">
+        <div className="container mt-5 mt-lg-0 mt-md-0">
+          <div className="category-title mt-sm-5 mt-lg-0 mt-md-0">
             <p>Top Categories</p>
-            <span>{category.length} categories {add.length} ads</span>
+            <span>
+              {category.length} categories {add.length} ads
+            </span>
           </div>
           <div className="category">
             {category.map((categ) => (
@@ -45,9 +47,9 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </section >
+      </section>
       <TopListingProperty></TopListingProperty>
-    </div >
+    </div>
   );
 };
 
