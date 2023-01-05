@@ -43,7 +43,7 @@ const Signup = () => {
 
   const saveUser = (name, email, userType) => {
     const user = { name, email, role: userType };
-    fetch("http://localhost:5000/users", {
+    fetch("https://home-rent-server-raian-cse.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -155,11 +155,13 @@ const Signup = () => {
                   )}
                 </div>
                 {signUpError && <p className="text-danger">{signUpError}</p>}
-                <input
-                  className="signIn-btn mb-5 login-btn"
-                  value="Sign Up"
-                  type="submit"
-                />
+                <div className="d-flex justify-content-center mb-3">
+                  <input
+                    className=" form-control login-btn"
+                    value="Sign Up"
+                    type="submit"
+                  />
+                </div>
               </form>
             </div>
           </div>

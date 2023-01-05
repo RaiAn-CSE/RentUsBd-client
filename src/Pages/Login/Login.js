@@ -4,55 +4,58 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthProvider';
+import { GoogleAuthProvider } from "firebase/auth";
+import React, { useContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 import useTitle from "../../hooks/useTitle";
 // import useToken from '../../hooks/useToken';
 
 const Login = () => {
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const { signIn, loginInWithGoogle } = useContext(AuthContext);
-  const [loginError, setLoginError] = useState('');
-  const [loginUserEmail, setLoginUserEmail] = useState('');
+  const [loginError, setLoginError] = useState("");
+  const [loginUserEmail, setLoginUserEmail] = useState("");
   // const [token] = useToken(loginUserEmail);
-  useTitle('Log in');
+  useTitle("Log in");
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   const googleProvider = new GoogleAuthProvider();
 
   const googleSignIn = () => {
     loginInWithGoogle(googleProvider)
-      .then(result => {
+      .then((result) => {
         const user = result.user;
         console.log(user);
-        navigate(from, { replace: true })
-        console.log(from)
+        navigate(from, { replace: true });
+        console.log(from);
       })
-      .catch(error => {
-        console.error(error)
-      })
-  }
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-  const handleLogin = data => {
-    setLoginError('');
+  const handleLogin = (data) => {
+    setLoginError("");
     signIn(data.email, data.password)
-      .then(result => {
+      .then((result) => {
         const user = result.user;
         console.log(user);
         navigate(from, { replace: true });
         setLoginUserEmail(data.email);
       })
-      .catch(error => {
-        console.log(error.message)
+      .catch((error) => {
+        console.log(error.message);
         setLoginError(error.message);
       });
-  }
-
+  };
 
   return (
     <div>
@@ -105,15 +108,19 @@ const Login = () => {
                   <input
                     {...register("password", {
                       required: "Password is required",
-                      minLength: { value: 6, message: 'Password must be 6 characters or longer' }
-                    }
-                    )}
+                      minLength: {
+                        value: 6,
+                        message: "Password must be 6 characters or longer",
+                      },
+                    })}
                     type="password"
                     className="form-control"
                     placeholder="Enter password"
                     id="inputPassword"
                   />
-                  {errors.password && <p className='text-danger'>{errors.password?.message}</p>}
+                  {errors.password && (
+                    <p className="text-danger">{errors.password?.message}</p>
+                  )}
                   <input
                     type="checkbox"
                     className=" m-3"
@@ -121,7 +128,13 @@ const Login = () => {
                   />
                   Show Password
                 </div>
-                <input className="login-btn mb-5" value='login' type="submit" />
+                <div className="d-flex justify-content-center">
+                  <input
+                    className="login-btn form-control mb-2"
+                    value="Login"
+                    type="submit"
+                  />
+                </div>
               </form>
             </div>
           </div>

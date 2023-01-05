@@ -13,18 +13,18 @@ import "./TopListingProperty.css";
 const TopListingProperty = () => {
   const [property, setProperty] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/productCollection")
+    fetch("https://home-rent-server-raian-cse.vercel.app/productCollection")
       .then((res) => res.json())
-      .then((data) => setProperty(data));
+      .then((data) => setProperty(data.slice(0, 10)));
   }, []);
   return (
     <div className="container mt-5">
-      <div className="text-center category-title">
+      <div className="text-center top-listing-title">
         <p>Top Listing Property</p>
       </div>
       <Swiper
         slidesPerView={4}
-        spaceBetween={30}
+        spaceBetween={10}
         slidesPerGroup={1}
         loop={true}
         loopFillGroupWithBlank={true}
@@ -37,26 +37,32 @@ const TopListingProperty = () => {
           0: {
             width: 0,
             slidesPerView: 1,
+            spaceBetween: 10,
           },
           400: {
             width: 400,
             slidesPerView: 1,
+            spaceBetween: 10,
           },
           520: {
             width: 520,
             slidesPerView: 2,
+            spaceBetween: 10,
           },
           960: {
             width: 950,
             slidesPerView: 3,
+            spaceBetween: 10,
           },
           1290: {
             width: 1290,
             slidesPerView: 4,
+            spaceBetween: 10,
           },
           1110: {
             width: 1110,
             slidesPerView: 4,
+            spaceBetween: 10,
           },
         }}
         className="mySwiper"

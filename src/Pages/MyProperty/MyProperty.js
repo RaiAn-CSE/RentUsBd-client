@@ -19,7 +19,7 @@ const MyProperty = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/products?email=${user?.email}`,
+          `https://home-rent-server-raian-cse.vercel.app/products?email=${user?.email}`,
           {
             headers: {},
           }
@@ -27,7 +27,7 @@ const MyProperty = () => {
         const data = await res.json();
         // console.log(data);
         return data;
-      } catch (error) {}
+      } catch (error) { }
     },
   });
 
@@ -36,7 +36,7 @@ const MyProperty = () => {
     const agree = window.confirm(`Are you sure you want to delete :${id} `);
     if (agree) {
       console.log("Deleting user with id:", id);
-      fetch(`http://localhost:5000/products/${id}`, {
+      fetch(`https://home-rent-server-raian-cse.vercel.app/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -93,7 +93,7 @@ const MyProperty = () => {
             </div>
             <div className="text-center mt-2">
               <button
-                className="dashboard-btn"
+                className="dashboard-btn form-control"
                 onClick={() => handleDelete(post._id)}
               >
                 Delete

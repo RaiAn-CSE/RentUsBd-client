@@ -3,6 +3,7 @@ import Banner from "../../component/Banner/Banner";
 import Hero from "../../component/Hero/Hero";
 import Category from "../../component/Category/Category";
 import "./Home.css";
+import useTitle from "../../hooks/useTitle";
 import TopListingProperty from "../../component/TopListingProperty/TopListingProperty";
 
 const Home = () => {
@@ -14,9 +15,10 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => setCategory(data));
   }, []);
+  useTitle("Home");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/allProducts`)
+    fetch(`https://home-rent-server-raian-cse.vercel.app/allProducts`)
       .then((res) => res.json())
       .then((data) => setAdd(data));
   }, []);

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./AddProperty.css";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 import useTitle from "../../hooks/useTitle";
 
 const AddProperty = () => {
+  const [multipleImages, setMultipleImages] = useState([]);
+
+  console.log(multipleImages);
+
   const { user } = useContext(AuthContext);
   useTitle("Add Property");
   const {
@@ -18,20 +22,20 @@ const AddProperty = () => {
   const imageHostKey = "d7bc9eb1fc3dad76ed26f9bf8911706b";
 
   const navigate = useNavigate();
-  // console.log(imageHostKey);
 
   const handleAddProduct = (data) => {
-    console.log(data);
-
     const image = data.image[0];
-
-    // console.log(image, image1, image2);
+    console.log(image);
     const formData = new FormData();
-    formData.append("image", image);
-
     console.log(formData);
+
+    // for (const key of Object.keys(multipleImages)) {
+    //   console.log(key);
+    //   formData.append('file1', data.image[key]);
+    // }
+
+    // formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
-    // console.log(url);
     fetch(url, {
       method: "POST",
       body: formData,
@@ -64,7 +68,7 @@ const AddProperty = () => {
           };
 
           // Save Products information to the database
-          fetch("http://localhost:5000/productCollection", {
+          fetch("https://home-rent-server-raian-cse.vercel.app/productCollection", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -82,6 +86,25 @@ const AddProperty = () => {
       });
   };
 
+  // Functions to preview multiple images
+  const changeMultipleFiles = (e) => {
+    console.log(e);
+    if (e.target.files) {
+      const imageArray = Array.from(e.target.files).map((file) =>
+        URL.createObjectURL(file)
+      );
+      setMultipleImages((prevImages) => prevImages.concat(imageArray));
+    }
+  };
+
+  const render = (data) => {
+    return data.map((image) => {
+      return <img className="image" src={image} alt="" key={image} />;
+    });
+  };
+
+
+
   return (
     <div>
       <h3 className="text-center">Add Your Property For Rent</h3>
@@ -89,7 +112,7 @@ const AddProperty = () => {
         <div className=" d-flex justify-content-center">
           <div className="add-property-box">
             <h4>Personal Information</h4>
-            <div className="row my-2">
+            {/* <div className="row my-2">
               <div className="col-md-4 col-lg-4 col-sm-12">
                 <Form>
                   <Form.Group>
@@ -399,7 +422,7 @@ const AddProperty = () => {
                   </Form.Select>
                 </Form>
               </div>
-            </div>
+            </div> */}
             <Form.Group controlId="formFileLg" className="mb-2">
               <Form.Label>Upload Property Image 1</Form.Label>
               <Form.Control
@@ -409,13 +432,31 @@ const AddProperty = () => {
                 type="file"
                 size="lg"
               />
-              {/* {errors.name && (
-                <p className="text-danger">{errors.image.message}</p>
-              )} */}
             </Form.Group>
 
-            <div className="text-center">
-              <input className="login-btn mt-4" value="Submit" type="submit" />
+
+            {/* input tag for multiple images */}
+            <input
+              type="file"
+              name="file1"
+              multiple
+              {...register('image', { required: true })}
+              onChange={changeMultipleFiles}
+            />
+            {/* error handling with React Hook Form */}
+            {errors.file && <p className="error">Please select an image</p>}
+
+            {/* The render function with the multiple image state */}
+            {render(multipleImages)}
+
+
+
+            <div className="d-flex justify-content-center">
+              <input
+                className="login-btn form-control mt-4"
+                value="Submit"
+                type="submit"
+              />
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 .sort-property-bg {
     height: 250px;
-    background-color: rgb(1, 27, 1);
+    background-color: #7168cf;
 }
 
 .sort-banner-title {
@@ -21,4 +21,16 @@
     font-weight: 400;
     line-height: 80%;
     color: #ffffff;
+}
+
+@media screen and (max-width: 600px) {
+    .sort-banner-title {
+        font-size: 25px;
+
+    }
+
+    .sort-banner-title span {
+        font-size: 14px;
+
+    }
 }

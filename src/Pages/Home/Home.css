@@ -1,3 +1,5 @@
-
-  
- 
+@media screen and (max-width: 600px) {
+    .category-title {
+        margin-top: 150px;
+    }
+}

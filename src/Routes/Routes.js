@@ -10,6 +10,7 @@ import AllRenters from "../Pages/AllRenters/AllRenters";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 // import AllRenters from "../Pages/AllRenters/AllRenters";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import FeedBack from "../Pages/FeedBack/FeedBack";
 import Home from "../Pages/Home/Home";
 import HomeSortProperty from "../Pages/HomeSortProperty/HomeSortProperty";
 import Login from "../Pages/Login/Login";
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/details/${params.id}`),
+          fetch(`https://home-rent-server-raian-cse.vercel.app/details/${params.id}`),
       },
     ],
   },
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/myProperty",
         element: <MyProperty></MyProperty>,
+      },
+      {
+        path: "/dashboard/feedback",
+        element: <FeedBack></FeedBack>,
       },
     ],
   },

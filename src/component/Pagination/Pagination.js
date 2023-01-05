@@ -10,7 +10,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   return (
     <nav className="d-flex justify-content-center">
-      <ul className="pagination">
+      <ul className="pagination ">
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
             <button onClick={() => paginate(number)} className="page-link">

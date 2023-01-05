@@ -54,14 +54,18 @@
 
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   .search-category {
     border-right: 0;
 
   }
 
+  .hero-title {
+    display: none;
+  }
+
   .search-property {
-    margin-top: -150px;
+    margin-top: -90px;
   }
 }
 

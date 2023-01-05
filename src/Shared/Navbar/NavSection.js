@@ -1,16 +1,25 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../../images/logo.svg";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useSeller from "../../hooks/useSeller";
+import useAdmin from "../../hooks/useAdmin";
 
 const NavSection = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isSeller] = useSeller(user?.email);
+  const [isAdmin] = useAdmin(user?.email);
+
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        navigate('/login');
+      })
       .catch((err) => console.log(err));
+
   };
   return (
     <div className="container">
@@ -46,21 +55,33 @@ const NavSection = () => {
                   All Properties
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/addProperty" className="nav-link nav-style">
-                  Add Property
-                </Link>
-              </li>
+              {
+                isSeller &&
+                <li className="nav-item">
+                  <Link to="/addProperty" className="nav-link nav-style">
+                    Add Property
+                  </Link>
+                </li>
+              }
               <li className="nav-item">
                 <Link to="/aboutUs" className="nav-link nav-style">
                   About Us
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/contactUs" className="nav-link nav-style">
-                  Contact Us
-                </Link>
-              </li>
+              {
+                isAdmin === true ? (
+                  <>
+                  </>
+                ) : (
+                  <>
+                    <li className="nav-item">
+                      <Link to="/contactUs" className="nav-link nav-style">
+                        Contact Us
+                      </Link>
+                    </li>
+                  </>
+                )
+              }
             </ul>
 
             {user?.uid ? (

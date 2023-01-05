@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import "../Dashboard/Dashboard.css";
+import "./Dashboard.css";
 import NavSection from "../../Shared/Navbar/NavSection";
 import useAdmin from "../../hooks/useAdmin";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -27,13 +27,27 @@ const Dashboard = () => {
           {isAdmin && (
             <>
               <div className="">
-                <Link className="dashboard-btn " to="/dashboard/allRenters">
+                <Link
+                  className="dashboard-btn form-control text-center "
+                  to="/dashboard/allRenters"
+                >
                   All Renters
                 </Link>
               </div>
               <div className="mt-3">
-                <Link className="dashboard-btn " to="/dashboard/allOwners">
+                <Link
+                  className="dashboard-btn form-control text-center"
+                  to="/dashboard/allOwners"
+                >
                   All Owners
+                </Link>
+              </div>
+              <div className="">
+                <Link
+                  className="dashboard-btn form-control text-center "
+                  to="/dashboard/feedback"
+                >
+                  Feedback
                 </Link>
               </div>
             </>
@@ -41,12 +55,18 @@ const Dashboard = () => {
           {isSeller && (
             <>
               <div className="">
-                <Link className="dashboard-btn " to="/dashboard/myProperty">
+                <Link
+                  className="dashboard-btn form-control text-center "
+                  to="/dashboard/myProperty"
+                >
                   My Property
                 </Link>
               </div>
               <div className="mt-3">
-                <Link className="dashboard-btn " to="/addProperty">
+                <Link
+                  className="dashboard-btn form-control text-center "
+                  to="/addProperty"
+                >
                   Add Property
                 </Link>
               </div>

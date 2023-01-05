@@ -44,3 +44,20 @@
   border: 1px solid #7065f0;
   transition: background-color 0.5s;
 }
+
+.top-listing-title p {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 110%;
+
+  color: #000929;
+
+}
+
+@media screen and (max-width: 600px) {
+  .top-listing-title p {
+
+    font-size: 25px;
+
+  }
+}
