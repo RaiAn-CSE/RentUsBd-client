@@ -16,14 +16,14 @@ const AllRenters = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          "https://home-rent-server-raian-cse.vercel.app/dashboard/allbuyers?role=buyer",
+          "https://rent-us-bd.vercel.app/dashboard/allbuyers?role=buyer",
           {
             headers: {},
           }
         );
         const data = await res.json();
         return data;
-      } catch (error) {}
+      } catch (error) { }
     },
   });
 
@@ -31,7 +31,7 @@ const AllRenters = () => {
     console.log(id);
     const agree = window.confirm(`Are you sure you want to delete :${id} `);
     if (agree) {
-      fetch(`https://home-rent-server-raian-cse.vercel.app/users/${id}`, {
+      fetch(`https://rent-us-bd.vercel.app/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

@@ -13,7 +13,7 @@ import "./TopListingProperty.css";
 const TopListingProperty = () => {
   const [property, setProperty] = useState([]);
   useEffect(() => {
-    fetch("https://home-rent-server-raian-cse.vercel.app/productCollection")
+    fetch("https://rent-us-bd.vercel.app/productCollection")
       .then((res) => res.json())
       .then((data) => setProperty(data.slice(0, 10)));
   }, []);

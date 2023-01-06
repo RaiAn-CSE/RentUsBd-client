@@ -43,7 +43,7 @@ const Signup = () => {
 
   const saveUser = (name, email, userType) => {
     const user = { name, email, role: userType };
-    fetch("https://home-rent-server-raian-cse.vercel.app/users", {
+    fetch("https://rent-us-bd.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

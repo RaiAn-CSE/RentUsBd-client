@@ -18,7 +18,7 @@ const Home = () => {
   useTitle("Home");
 
   useEffect(() => {
-    fetch(`https://home-rent-server-raian-cse.vercel.app/allProducts`)
+    fetch(`https://rent-us-bd.vercel.app/allProducts`)
       .then((res) => res.json())
       .then((data) => setAdd(data));
   }, []);

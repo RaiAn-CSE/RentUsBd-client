@@ -17,23 +17,23 @@ const AllOwners = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          "https://home-rent-server-raian-cse.vercel.app/dashboard/allsellers?role=seller",
+          "https://rent-us-bd.vercel.app/dashboard/allsellers?role=seller",
           {
             headers: {},
           }
         );
         const data = await res.json();
         return data;
-      } catch (error) {}
+      } catch (error) { }
     },
   });
 
-  const handleDelete = (id) => {
+  const handleDelete = id => {
     console.log(id);
     const agree = window.confirm(`Are you sure you want to delete :${id} `);
     if (agree) {
       console.log("Deleting user with id:", id);
-      fetch(`https://home-rent-server-raian-cse.vercel.app/users/${id}`, {
+      fetch(`https://rent-us-bd.vercel.app/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

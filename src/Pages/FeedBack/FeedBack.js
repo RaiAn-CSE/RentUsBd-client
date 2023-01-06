@@ -14,14 +14,14 @@ const FeedBack = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          "https://home-rent-server-raian-cse.vercel.app/feedback",
+          "https://rent-us-bd.vercel.app/feedback",
           {
             headers: {},
           }
         );
         const data = await res.json();
         return data;
-      } catch (error) {}
+      } catch (error) { }
     },
   });
 
@@ -30,7 +30,7 @@ const FeedBack = () => {
     const agree = window.confirm(`Are you sure you want to delete :${id} `);
     if (agree) {
       console.log("Deleting user with id:", id);
-      fetch(`https://home-rent-server-raian-cse.vercel.app/feedback/${id}`, {
+      fetch(`https://rent-us-bd.vercel.app/feedback/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

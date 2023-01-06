@@ -60,7 +60,7 @@ const AddProperty = () => {
 
           // Save Products information to the database
           fetch(
-            "https://home-rent-server-raian-cse.vercel.app/productCollection",
+            "https://rent-us-bd.vercel.app/productCollection",
             {
               method: "POST",
               headers: {
@@ -72,7 +72,7 @@ const AddProperty = () => {
           )
             .then((res) => res.json())
             .then((result) => {
-              console.log(result);
+              // console.log(result);
               // toast.success(`${data.name} is added successfully`);
               navigate("/allProperty");
             });

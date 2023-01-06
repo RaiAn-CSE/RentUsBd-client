@@ -21,7 +21,7 @@ const ContactUs = () => {
       email: user.email,
       message: data.message,
     };
-    fetch("https://home-rent-server-raian-cse.vercel.app/feedback", {
+    fetch("https://rent-us-bd.vercel.app/feedback", {
       method: "POST",
       headers: {
         "content-type": "application/json",

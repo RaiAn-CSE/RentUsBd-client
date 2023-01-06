@@ -11,7 +11,7 @@ const HomeSortProperty = () => {
 
   useEffect(() => {
     fetch(
-      `https://home-rent-server-raian-cse.vercel.app/categoryWiseData?title=${location.state.data.title}`
+      `https://rent-us-bd.vercel.app/categoryWiseData?title=${location.state.data.title}`
     )
       .then((res) => res.json())
       .then((data) => {

@@ -74,14 +74,14 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://home-rent-server-raian-cse.vercel.app/details/${params.id}`),
+          fetch(`https://rent-us-bd.vercel.app/details/${params.id}`),
       },
       {
         path: "/conversations/:propertyId",
         element: (
-            <PrivateRoute>
-              <Conversations/>
-            </PrivateRoute>
+          <PrivateRoute>
+            <Conversations />
+          </PrivateRoute>
         )
       }
     ],

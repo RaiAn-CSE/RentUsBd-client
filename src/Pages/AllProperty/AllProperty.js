@@ -76,7 +76,7 @@ const AllProperty = () => {
     });
 
     fetch(
-      `https://home-rent-server-raian-cse.vercel.app/productCollection?price=${price}&city=${city}&rentType=${rentCheckValue}&bedAmount=${bedCheckValue}&washAmount=${washCheckValue}&month=${month}`
+      `https://rent-us-bd.vercel.app/productCollection?price=${price}&city=${city}&rentType=${rentCheckValue}&bedAmount=${bedCheckValue}&washAmount=${washCheckValue}&month=${month}`
     )
       .then((res) => res.json())
       .then((data) => setPosts(data));
@@ -87,26 +87,24 @@ const AllProperty = () => {
     const city = event.target.city.value;
     const area = event.target.area.value;
     const rent = event.target.rent.value;
-    console.log(city, area, rent);
 
     fetch(
-      `https://home-rent-server-raian-cse.vercel.app/sortProducts?city=${city}&area=${area}&rent=${rent}`
+      `https://rent-us-bd.vercel.app/sortProducts?city=${city}&area=${area}&rent=${rent}`
     )
       .then((res) => res.json())
       .then((data) => setPosts(data));
   };
   useEffect(() => {
     if (homeSearch?.city) {
-      console.log("Asche");
       fetch(
-        `https://home-rent-server-raian-cse.vercel.app/sortProducts?city=${homeSearch?.city}&area=${homeSearch?.area}&rent=${homeSearch?.rent}`
+        `https://rent-us-bd.vercel.app/sortProducts?city=${homeSearch?.city}&area=${homeSearch?.area}&rent=${homeSearch?.rent}`
       )
         .then((res) => res.json())
         .then((data) => setPosts(data));
     } else {
       const fetchPosts = async () => {
         setLoading(true);
-        const res = await axios.get("https://home-rent-server-raian-cse.vercel.app/productCollection");
+        const res = await axios.get("https://rent-us-bd.vercel.app/productCollection");
         setPosts(res.data);
         setLoading(false);
       };
