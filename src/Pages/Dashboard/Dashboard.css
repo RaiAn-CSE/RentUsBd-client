@@ -19,6 +19,32 @@
 
 }
 
+.dasboard-bg {
+    background: #7065f0;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.dasboard-bg h3 {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 80%;
+    color: #ffffff;
+    background-position: center;
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .dasboard-bg h3 {
+        font-size: 25px;
+
+    }
+}
+
 .dashboard-btn {
     text-decoration: none;
     background-color: #7065f0 !important;

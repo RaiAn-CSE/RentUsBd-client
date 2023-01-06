@@ -19,62 +19,67 @@ const Dashboard = () => {
       .then((data) => setMyProperty(data));
   }, []);
   return (
-    <div className="container">
+    <div className="">
       <NavSection></NavSection>
-      <h3 className="text-center mb-5 mt-5">Welcome to Dashboard</h3>
-      <div className="row">
-        <div className="col-md-3 col-lg-3 col-sm-12 mb-4">
-          {isAdmin && (
-            <>
-              <div className="">
-                <Link
-                  className="dashboard-btn form-control text-center "
-                  to="/dashboard/allRenters"
-                >
-                  All Renters
-                </Link>
-              </div>
-              <div className="mt-3">
-                <Link
-                  className="dashboard-btn form-control text-center"
-                  to="/dashboard/allOwners"
-                >
-                  All Owners
-                </Link>
-              </div>
-              <div className="">
-                <Link
-                  className="dashboard-btn form-control text-center "
-                  to="/dashboard/feedback"
-                >
-                  Feedback
-                </Link>
-              </div>
-            </>
-          )}
-          {isSeller && (
-            <>
-              <div className="">
-                <Link
-                  className="dashboard-btn form-control text-center "
-                  to="/dashboard/myProperty"
-                >
-                  My Property
-                </Link>
-              </div>
-              <div className="mt-3">
-                <Link
-                  className="dashboard-btn form-control text-center "
-                  to="/addProperty"
-                >
-                  Add Property
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
-        <div className="col-md-9 col-lg-9  col-sm-12">
-          <Outlet></Outlet>
+      <div className="dasboard-bg ">
+        <h3 className="">Welcome to Dashboard</h3>
+      </div>
+
+      <div className="container">
+        <div className=" row ">
+          <div className="col-md-3 col-lg-3 col-sm-12 mb-4 mt-3">
+            {isAdmin && (
+              <>
+                <div className=" mt-5">
+                  <Link
+                    className="dashboard-btn form-control text-center "
+                    to="/dashboard/allRenters"
+                  >
+                    All Renters
+                  </Link>
+                </div>
+                <div className="mt-3">
+                  <Link
+                    className="dashboard-btn form-control text-center"
+                    to="/dashboard/allOwners"
+                  >
+                    All Owners
+                  </Link>
+                </div>
+                <div className=" mt-3">
+                  <Link
+                    className="dashboard-btn form-control text-center "
+                    to="/dashboard/feedback"
+                  >
+                    Feedback
+                  </Link>
+                </div>
+              </>
+            )}
+            {isSeller && (
+              <>
+                <div className="">
+                  <Link
+                    className="dashboard-btn form-control text-center "
+                    to="/dashboard/myProperty"
+                  >
+                    My Property
+                  </Link>
+                </div>
+                <div className="mt-3">
+                  <Link
+                    className="dashboard-btn form-control text-center "
+                    to="/addProperty"
+                  >
+                    Add Property
+                  </Link>
+                </div>
+              </>
+            )}
+          </div>
+          <div className="col-md-9 col-lg-9  col-sm-12">
+            <Outlet></Outlet>
+          </div>
         </div>
       </div>
     </div>

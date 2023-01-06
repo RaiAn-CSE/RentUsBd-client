@@ -5,7 +5,7 @@ import "./PropertyDetails.css";
 import PropertyDescription from "../../component/PropertyDescription/PropertyDescription";
 import PropertyAddress from "../../component/PropertyAddress/PropertyAddress";
 import PropertyFeatures from "../../component/PropertyFeatures/PropertyFeatures";
-import { useLoaderData } from "react-router-dom";
+import {Link, useLoaderData} from "react-router-dom";
 
 const PropertyDetails = () => {
   const propertyData = useLoaderData();
@@ -156,6 +156,12 @@ const PropertyDetails = () => {
                 {" "}
                 <button className="contact-btn">
                   <a href={"mailto:" + email}>Email</a>
+                </button>
+              </div>
+              <div className="col-6">
+                {" "}
+                <button className="contact-btn">
+                  <Link to="/conversations">Message</Link>
                 </button>
               </div>
             </div>

@@ -16,10 +16,9 @@ const NavSection = () => {
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        navigate('/login');
+        navigate("/login");
       })
       .catch((err) => console.log(err));
-
   };
   return (
     <div className="container">
@@ -55,33 +54,31 @@ const NavSection = () => {
                   All Properties
                 </Link>
               </li>
-              {
-                isSeller &&
+
+              {isSeller && (
                 <li className="nav-item">
                   <Link to="/addProperty" className="nav-link nav-style">
                     Add Property
                   </Link>
                 </li>
-              }
+              )}
+
               <li className="nav-item">
                 <Link to="/aboutUs" className="nav-link nav-style">
                   About Us
                 </Link>
               </li>
-              {
-                isAdmin === true ? (
-                  <>
-                  </>
-                ) : (
-                  <>
-                    <li className="nav-item">
-                      <Link to="/contactUs" className="nav-link nav-style">
-                        Contact Us
-                      </Link>
-                    </li>
-                  </>
-                )
-              }
+              {isAdmin === true ? (
+                <></>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link to="/contactUs" className="nav-link nav-style">
+                      Contact Us
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
 
             {user?.uid ? (

@@ -16,6 +16,8 @@ import HomeSortProperty from "../Pages/HomeSortProperty/HomeSortProperty";
 import Login from "../Pages/Login/Login";
 import MyProperty from "../Pages/MyProperty/MyProperty";
 import PropertyDetails from "../Pages/PropertyDetails/PropertyDetails";
+import Conversations from "../Pages/Conversations/Conversations";
+import ConversationMessages from "../Pages/Conversations/ConversationMessages";
 import Signup from "../Pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 // import AdminRoute from "./AdminRoute/AdminRoute";
@@ -75,6 +77,22 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`https://home-rent-server-raian-cse.vercel.app/details/${params.id}`),
       },
+      {
+        path: "/conversations",
+        element: (
+            <PrivateRoute>
+              <Conversations/>
+            </PrivateRoute>
+        )
+      },
+      {
+        path: "/conversation-messages/:conversationId",
+        element: (
+            <PrivateRoute>
+              <ConversationMessages/>
+            </PrivateRoute>
+        )
+      }
     ],
   },
   {

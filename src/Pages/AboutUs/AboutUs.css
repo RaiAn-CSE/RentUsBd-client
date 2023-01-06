@@ -81,3 +81,9 @@
         font-size: 20px;
     }
 }
+
+.feature-styling {
+    box-shadow: 0 5px 15px rgb(1 1 1 / 20%);
+    padding: 20px 30px;
+    border-radius: 20px;
+}

@@ -24,7 +24,7 @@ const AllOwners = () => {
         );
         const data = await res.json();
         return data;
-      } catch (error) { }
+      } catch (error) {}
     },
   });
 
@@ -53,6 +53,7 @@ const AllOwners = () => {
 
   return (
     <div>
+      <h2 className="text-center mt-3">All Owners List</h2>
       <Table striped bordered hover>
         <thead>
           <tr style={{ backgroundColor: "#7065f0", color: "white" }}>
@@ -70,7 +71,7 @@ const AllOwners = () => {
               <td>{user.email}</td>
               <td>
                 <button
-                  className="btn btn-outline  form-control dashboard-btn w-50 btn-xs mr-3 mb-5"
+                  className="form-control dashboard-btn w-100"
                   onClick={() => handleDelete(user._id)}
                 >
                   Delete

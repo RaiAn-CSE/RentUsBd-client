@@ -112,7 +112,7 @@ const AddProperty = () => {
         <div className=" d-flex justify-content-center">
           <div className="add-property-box">
             <h4>Personal Information</h4>
-            {/* <div className="row my-2">
+            <div className="row my-2">
               <div className="col-md-4 col-lg-4 col-sm-12">
                 <Form>
                   <Form.Group>
@@ -422,7 +422,7 @@ const AddProperty = () => {
                   </Form.Select>
                 </Form>
               </div>
-            </div> */}
+            </div>
             <Form.Group controlId="formFileLg" className="mb-2">
               <Form.Label>Upload Property Image 1</Form.Label>
               <Form.Control
