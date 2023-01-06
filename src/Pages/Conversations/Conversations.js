@@ -1,33 +1,48 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../contexts/AuthProvider";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { BsPersonCircle } from "react-icons/bs";
+import React, {useContext, useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import {useForm} from "react-hook-form";
+import {BsPersonCircle} from "react-icons/bs";
+
+import {AuthContext} from "../../contexts/AuthProvider";
+
 import "./Conversation.css";
 
 const Conversations = () => {
-  const { user } = useContext(AuthContext);
-  const { email: userEmail } = user || {};
+  const {propertyId} = useParams() || {}
+  const {user} = useContext(AuthContext);
+  const {email: userEmail} = user || {};
   const [conversations, setConversations] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response =
-        (await axios.get(`http://localhost:5000/conversations/${userEmail}`)) ||
-        {};
+  const fetchConversations = async () => {
+    const response =
+      (await axios.post(`http://localhost:5000/conversations`, {email: userEmail, propertyId})) ||
+      {};
+    setConversations(response?.data?.conversations || []);
+  }
 
-      setConversations(response?.data?.conversations || []);
-    }
-    fetchData();
+  useEffect(() => {
+    fetchConversations();
   }, []);
 
-  const getParticipantName = (participants = []) => {
+  const getReceiverParticipant = (participants = []) => {
     const participantInfo = participants.find(
       (participant) => participant.email !== userEmail
     );
 
-    return participantInfo?.name;
+    return participantInfo;
   };
+
+  const {register, handleSubmit} = useForm();
+
+  const addNewMessage = async (form) => {
+    const response = await axios.post("http://localhost:5000/conversations/messages", {
+      conversationId: form.conversationId,
+      message: form.message,
+      senderEmail: userEmail
+    }) || {}
+    await fetchConversations()
+  }
 
   return (
     <>
@@ -35,51 +50,50 @@ const Conversations = () => {
         <h2 className="text-center">Conversation</h2>
 
         {/* Chat frontend design */}
-        <div className="message-container mb-4">
-          <div className="contact-info mb-3 border-bottom">
-            <h3>
-              <BsPersonCircle /> Name
-            </h3>
-            <span>Email: robi@gmail.com</span>
-          </div>
-          <div className="feedback">
-            <p>
-              <span className=" message w-50">Hi</span>
-            </p>
-            <p style={{ textAlign: "right" }}>
-              <span className=" message w-50">Hello</span>
-            </p>
+        {conversations.map((conversation) => (
+          <div className="message-container mb-4">
+            <div className="contact-info mb-3 border-bottom">
+              <h3>
+                <BsPersonCircle/> {getReceiverParticipant(conversation?.participants)?.name}
+              </h3>
+              <span>Email: {getReceiverParticipant(conversation?.participants)?.email}</span>
+            </div>
 
-            {/* <p style={conversationMessage?.createdBy === userEmail ? {textAlign: "right"} : {textAlign: "left"}}>{conversationMessage?.createdBy} {conversationMessage?.message}</p> */}
-          </div>
-          <div className="delete-btn">
-            <input
-              // {...register("message", {required: true})}
-              type="text"
-              className="form-control"
-              id="exampleFormControlInput1"
-              placeholder="Type your message here"
-            />
-            <input
-              className="login-btn form-control ms-2 w-25"
-              value="Send"
-              type="submit"
-            />
-          </div>
-        </div>
+            <div className="feedback">
+              {
+                conversation?.conversationMessages.map((conversationMessage) => (
+                  <p style={conversationMessage?.createdBy === userEmail ? {textAlign: "right"} : {}}>
+                    <span className=" message w-50">{conversationMessage?.message}</span>
+                  </p>
+                ))
+              }
+            </div>
 
-        <div></div>
-
-        <ul className="list-group">
-          {conversations.map((conversation) => (
-            <Link
-              className="list-group-item"
-              to={`/conversation-messages/${conversation?._id}`}
-            >
-              {getParticipantName(conversation?.participants)}
-            </Link>
-          ))}
-        </ul>
+            <div className="delete-btn">
+              <form onSubmit={handleSubmit(addNewMessage)}>
+                <input
+                  {...register("conversationId", {required: true})}
+                  type="text"
+                  hidden={true}
+                  value={conversation._id}
+                  style={{display: "none"}}
+                />
+                <input
+                  {...register("message", {required: true})}
+                  type="text"
+                  className="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="Type your message here"
+                />
+                <input
+                  className="login-btn form-control ms-2 w-25"
+                  value="Send"
+                  type="submit"
+                />
+              </form>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

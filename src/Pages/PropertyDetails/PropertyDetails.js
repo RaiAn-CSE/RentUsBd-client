@@ -158,10 +158,10 @@ const PropertyDetails = () => {
                   <a href={"mailto:" + email}>Email</a>
                 </button>
               </div>
-              <div className="col-6">
+              <div className="col-6 mt-5">
                 {" "}
                 <button className="contact-btn">
-                  <Link to="/conversations">Message</Link>
+                  <Link to={`/conversations/${_id}`}>Message</Link>
                 </button>
               </div>
             </div>
