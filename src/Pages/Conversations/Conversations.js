@@ -13,6 +13,7 @@ const Conversations = () => {
   const { user } = useContext(AuthContext);
   const { email: userEmail } = user || {};
   const [conversations, setConversations] = useState([]);
+  const [activeConversation, setActiveConversation] = useState({})
 
   const fetchConversations = async () => {
     const response =
@@ -27,24 +28,32 @@ const Conversations = () => {
     fetchConversations();
   }, []);
 
-  const getReceiverParticipant = (participants = []) => {
-    const participantInfo = participants.find(
-      (participant) => participant.email !== userEmail
-    );
+  const getReceiverParticipant = (participants = []) => (participants.find(
+    (participant) => participant.email !== userEmail
+  ));
 
-    return participantInfo;
-  };
-
-  const { register, handleSubmit } = useForm();
+  const { register, reset, handleSubmit } = useForm();
 
   const addNewMessage = async (form) => {
-    const response =
-      (await axios.post("http://localhost:5000/conversations/messages", {
-        conversationId: form.conversationId,
-        message: form.message,
-        senderEmail: userEmail,
-      })) || {};
-    await fetchConversations();
+    if (activeConversation?._id) {
+      const response =
+        (await axios.post("http://localhost:5000/conversations/messages", {
+          conversationId: activeConversation._id,
+          message: form.message,
+          senderEmail: userEmail,
+        })) || {};
+      const newMessage = response?.data?.conversationMessage
+      if (newMessage) {
+        setActiveConversation((prevState) => {
+          const {conversationMessages} = prevState
+          if (!conversationMessages?.find((item) => item._id === newMessage?._id)) {
+            conversationMessages.push(newMessage)
+          }
+          return prevState
+        })
+      }
+    } else alert("Please choose a conversation first!");
+    reset({message: ""});
   };
 
   return (
@@ -52,72 +61,80 @@ const Conversations = () => {
       <div className="container">
         <h2 className="text-center">Conversation</h2>
         <div className="row">
-          <div className="col-3 message">
-            <ul>
-              <h3>User 1</h3>
-              <h3> User 2</h3>
-              <h3> User 3</h3>
-              <h3> User 4</h3>
-              <h3> User 5</h3>
-            </ul>
-          </div>
           <div className="col-9">
-            {conversations.map((conversation) => (
-              <div className="message-container mb-4">
-                <div className="contact-info mb-3 border-bottom">
-                  <h3>
-                    <BsPersonCircle />{" "}
-                    {getReceiverParticipant(conversation?.participants)?.name}
-                  </h3>
-                  <span>
-                    Email:{" "}
-                    {getReceiverParticipant(conversation?.participants)?.email}
-                  </span>
+            <div className="row">
+              <div className="col-3">
+              {conversations.map((conversation) => (
+                <div className="message mb-2" onClick={() => setActiveConversation(conversation)} key={conversation?._id} style={{cursor: "pointer"}}>
+                  <div className="contact-info border-bottom">
+                    <h5>
+                      <BsPersonCircle />{" "}
+                      {getReceiverParticipant(conversation?.participants)?.name}
+                    </h5>
+                    <span>
+                      Email:{" "}
+                      {getReceiverParticipant(conversation?.participants)?.email}
+                    </span>
+                  </div>
                 </div>
+              ))}
+              </div>
 
-                <div className="feedback">
-                  {conversation?.conversationMessages.map(
-                    (conversationMessage) => (
-                      <p
-                        style={
-                          conversationMessage?.createdBy === userEmail
-                            ? { textAlign: "right" }
-                            : {}
-                        }
-                      >
+              {
+                activeConversation?._id ?
+                (<div className="col-9">
+                  <div className="message-container mb-4">
+                    <div className="contact-info mb-3 border-bottom">
+                      <h3>
+                        <BsPersonCircle/>{" "}
+                        {getReceiverParticipant(activeConversation?.participants)?.name}
+                      </h3>
+                      <span>
+                    Email:{" "}
+                        {getReceiverParticipant(activeConversation?.participants)?.email}
+                  </span>
+                    </div>
+
+                    <div className="feedback">
+                      {activeConversation?.conversationMessages.map(
+                        (conversationMessage) => (
+                          <p
+                            key={conversationMessage?._id}
+                            style={
+                              conversationMessage?.createdBy === userEmail
+                                ? {textAlign: "right"}
+                                : {}
+                            }
+                          >
                         <span className=" message w-50">
                           {conversationMessage?.message}
                         </span>
-                      </p>
-                    )
-                  )}
-                </div>
+                          </p>
+                        )
+                      )}
+                    </div>
 
-                <div className="delete-btn">
-                  <form onSubmit={handleSubmit(addNewMessage)}>
-                    <input
-                      {...register("conversationId", { required: true })}
-                      type="text"
-                      hidden={true}
-                      value={conversation._id}
-                      style={{ display: "none" }}
-                    />
-                    <input
-                      {...register("message", { required: true })}
-                      type="text"
-                      className="form-control"
-                      id="exampleFormControlInput1"
-                      placeholder="Type your message here"
-                    />
-                    <input
-                      className="login-btn form-control ms-2 w-25"
-                      value="Send"
-                      type="submit"
-                    />
-                  </form>
-                </div>
-              </div>
-            ))}
+
+                    <form onSubmit={handleSubmit(addNewMessage)}>
+                      <div className="delete-btn">
+                        <input
+                          {...register("message", {required: true})}
+                          type="text"
+                          className="form-control"
+                          id="exampleFormControlInput1"
+                          placeholder="Type your message here"
+                        />
+                        <input
+                          className="login-btn form-control ms-2 w-25"
+                          value="Send"
+                          type="submit"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>) : <></>
+              }
+            </div>
           </div>
         </div>
 
