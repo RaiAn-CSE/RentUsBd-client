@@ -5,10 +5,12 @@ import logo from "../../images/logo.svg";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useSeller from "../../hooks/useSeller";
 import useAdmin from "../../hooks/useAdmin";
+import useBuyer from "../../hooks/useBuyer";
 
 const NavSection = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isSeller] = useSeller(user?.email);
+  const [isBuyer] = useBuyer(user?.email);
   const [isAdmin] = useAdmin(user?.email);
 
   const navigate = useNavigate();
@@ -55,12 +57,16 @@ const NavSection = () => {
                 </Link>
               </li>
 
-              {isSeller && (
-                <li className="nav-item">
-                  <Link to="/addProperty" className="nav-link nav-style">
-                    Add Property
-                  </Link>
-                </li>
+              {isBuyer === true ? (
+                <></>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link to="/addProperty" className="nav-link nav-style">
+                      Add Property
+                    </Link>
+                  </li>
+                </>
               )}
 
               <li className="nav-item">
@@ -68,6 +74,7 @@ const NavSection = () => {
                   About Us
                 </Link>
               </li>
+
               {isAdmin === true ? (
                 <></>
               ) : (
