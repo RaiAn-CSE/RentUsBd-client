@@ -57,7 +57,7 @@ const NavSection = () => {
                 </Link>
               </li>
 
-              {isBuyer === true ? (
+              {isBuyer || isAdmin === true ? (
                 <></>
               ) : (
                 <>
