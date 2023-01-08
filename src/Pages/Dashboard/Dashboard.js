@@ -6,6 +6,7 @@ import useAdmin from "../../hooks/useAdmin";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useSeller from "../../hooks/useSeller";
 import useTitle from "../../hooks/useTitle";
+import { Typewriter } from 'react-simple-typewriter'
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -21,8 +22,24 @@ const Dashboard = () => {
   return (
     <div className="">
       <NavSection></NavSection>
-      <div className="dasboard-bg ">
-        <h3 className="">Welcome to Dashboard</h3>
+      <div className="text-center">
+        <h3 style={{ paddingTop: '5rem', margin: 'auto 0', fontWeight: 'normal' }}>
+          Welcome to{' '}
+          <span style={{ color: 'red', fontWeight: 'bold' }}>
+            {/* Style will be inherited from the parent element */}
+            <Typewriter
+              words={['Dashboard', 'Dashboard']}
+              loop={5}
+              cursor
+              cursorStyle='_'
+              typeSpeed={150}
+              deleteSpeed={60}
+              delaySpeed={1500}
+            // onLoopDone={handleDone}
+            // onType={handleType}
+            />
+          </span>
+        </h3>
       </div>
 
       <div className="container">
