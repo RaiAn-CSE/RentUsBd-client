@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDGOlfmVfHAywCTnocRUs_50kRCSACkUBk",
-    authDomain: "rentusbd.firebaseapp.com",
-    projectId: "rentusbd",
-    storageBucket: "rentusbd.appspot.com",
-    messagingSenderId: "296453760288",
-    appId: "1:296453760288:web:f2063abd31f99840ace345",
+    apiKey: "AIzaSyC3YkdngzQBuCvTsia0gEL0_nh4Y1I2SsU",
+    authDomain: "rentusbd-55edb.firebaseapp.com",
+    projectId: "rentusbd-55edb",
+    storageBucket: "rentusbd-55edb.appspot.com",
+    messagingSenderId: "447967797167",
+    appId: "1:447967797167:web:8bc15b3a2495718ca7d95a"
 };
 
 // Initialize Firebase

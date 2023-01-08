@@ -17,7 +17,7 @@ const AllOwners = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          "https://rent-us-bd.vercel.app/dashboard/allsellers?role=seller",
+          "http://localhost:5000/dashboard/allsellers?role=seller",
           {
             headers: {},
           }
@@ -33,7 +33,7 @@ const AllOwners = () => {
     const agree = window.confirm(`Are you sure you want to delete :${id} `);
     if (agree) {
       console.log("Deleting user with id:", id);
-      fetch(`https://rent-us-bd.vercel.app/users/${id}`, {
+      fetch(`http://localhost:5000/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

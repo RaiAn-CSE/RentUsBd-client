@@ -17,7 +17,7 @@ const Conversations = () => {
 
   const fetchConversations = async () => {
     const response =
-      (await axios.post(`https://rent-us-bd.vercel.app/conversations`, {
+      (await axios.post(`http://localhost:5000/conversations`, {
         email: userEmail,
         propertyId,
       })) || {};
@@ -36,7 +36,7 @@ const Conversations = () => {
   const addNewMessage = async (form) => {
     if (activeConversation?._id) {
       const response =
-        (await axios.post("https://rent-us-bd.vercel.app/conversations/messages", {
+        (await axios.post("http://localhost:5000/conversations/messages", {
           conversationId: activeConversation._id,
           message: form.message,
           senderEmail: userEmail,

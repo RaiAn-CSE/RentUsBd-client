@@ -76,7 +76,7 @@ const AllProperty = () => {
     });
 
     fetch(
-      `https://rent-us-bd.vercel.app/productCollection?price=${price}&city=${city}&rentType=${rentCheckValue}&bedAmount=${bedCheckValue}&washAmount=${washCheckValue}&month=${month}`
+      `http://localhost:5000/productCollection?price=${price}&city=${city}&rentType=${rentCheckValue}&bedAmount=${bedCheckValue}&washAmount=${washCheckValue}&month=${month}`
     )
       .then((res) => res.json())
       .then((data) => setPosts(data));
@@ -89,7 +89,7 @@ const AllProperty = () => {
     const rent = event.target.rent.value;
 
     fetch(
-      `https://rent-us-bd.vercel.app/sortProducts?city=${city}&area=${area}&rent=${rent}`
+      `http://localhost:5000/sortProducts?city=${city}&area=${area}&rent=${rent}`
     )
       .then((res) => res.json())
       .then((data) => setPosts(data));
@@ -97,14 +97,14 @@ const AllProperty = () => {
   useEffect(() => {
     if (homeSearch?.city) {
       fetch(
-        `https://rent-us-bd.vercel.app/sortProducts?city=${homeSearch?.city}&area=${homeSearch?.area}&rent=${homeSearch?.rent}`
+        `http://localhost:5000/sortProducts?city=${homeSearch?.city}&area=${homeSearch?.area}&rent=${homeSearch?.rent}`
       )
         .then((res) => res.json())
         .then((data) => setPosts(data));
     } else {
       const fetchPosts = async () => {
         setLoading(true);
-        const res = await axios.get("https://rent-us-bd.vercel.app/productCollection");
+        const res = await axios.get("http://localhost:5000/productCollection");
         setPosts(res.data);
         setLoading(false);
       };

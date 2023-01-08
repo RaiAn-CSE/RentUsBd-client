@@ -10,7 +10,7 @@ const Category = ({ categ, setTotalAdd, totalAdd }) => {
   }
 
   useEffect(() => {
-    fetch(`https://rent-us-bd.vercel.app/categoryWiseData?title=${title}`)
+    fetch(`http://localhost:5000/categoryWiseData?title=${title}`)
       .then(res => res.json())
       .then(data => {
         setAdd(data.length)
